@@ -1,0 +1,6 @@
+# Zen Pomodoro dependencies
+#
+# v1 uses only tkinter, which is part of Python's standard library —
+# nothing to pip install. This file is a placeholder that will fill in
+# once we add features that need real packages (e.g. an audio library
+# like pygame for calming music in a later version).
