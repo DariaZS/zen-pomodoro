@@ -1,6 +1,14 @@
 # Zen Pomodoro dependencies
 #
-# v1 uses only tkinter, which is part of Python's standard library —
-# nothing to pip install. This file is a placeholder that will fill in
-# once we add features that need real packages (e.g. an audio library
-# like pygame for calming music in a later version).
+# v1 uses only tkinter (Python's standard-library GUI toolkit).
+#
+# NOTE: tkinter is NOT a pip package — it ships with Python, but only if
+# Python was built with Tk support. Some installs (notably pyenv on macOS)
+# are built WITHOUT it. If `python -m tkinter` fails, install Tk and
+# rebuild Python:
+#     brew install tcl-tk
+#     pyenv install <your-python-version>
+# then recreate your virtual environment.
+#
+# No pip-installable packages yet. Real dependencies (e.g. an audio
+# library for calming music) will be added here in a later version.
