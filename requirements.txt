@@ -12,3 +12,4 @@
 #
 # No pip-installable packages yet. Real dependencies (e.g. an audio
 # library for calming music) will be added here in a later version.
+pytest>=8.0.0
