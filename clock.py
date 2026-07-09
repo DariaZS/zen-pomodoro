@@ -15,6 +15,8 @@ FACE = "#2a2a28"     # clock face, a touch lighter
 RIM = "#3a3a37"      # outer rim
 NUMERAL = "#c9a26b"  # soft gold
 HAND = "#89a99a"     # muted sage
+FOCUS_ARC = '#89a99a'# sage green - work
+BREAK_ARC = "#8C9579" # muted dusty tan - rest
 
 def pick_numeral_font(root):
     '''Pick a playful but readable numeral font from installed fonts'''
@@ -123,5 +125,58 @@ class Clock:
         c.create_oval(
             cen - 5, cen - 5, cen + 5, cen + 5,
             fill=HAND, outline='', tags='hands',
+        )
+
+    def draw_minute_ticks(self):
+        '''Draw 60 small marks around the rim - long hours, shorter between. A classic clockface detail.'''
+        c = self.canvas
+        cen = self.center
+
+        for i in range(60):
+            angle = math.radians(-90 + i * 6)   # 360 / 60 = 6 degrees apart
+
+            if i % 5 == 0:
+                inner = self.radius - 10
+                width = 2
+            else:
+                inner = self.radius - 6
+                width = 1
+
+            outer = self.radius - 2
+            x1 = cen + inner * math.cos(angle)
+            y1 = cen + inner * math.sin(angle)
+            x2 = cen + outer * math.cos(angle)
+            y2 = cen + outer * math.sin(angle)
+            c.create_line(x1, y1, x2, y2, fill=NUMERAL, width=width)
+
+    def draw_arc(self, fraction, color):
+        '''Draw a soft arc around the rim showing time remaining
+        Leaves a small gat at the top so the arc reads as a gauge with
+        clear start  and end, rather than an ambiguous full ring.
+        fraction 1.0 = nearly full ( with the gap ), 0.0 = nothing left.'''
+
+        c = self.canvas
+        cen = self.center
+        r = self.radius + 3     # just outside the face
+
+        # erase the previous arc (tagged) so it redraws cleanly each time
+        c.delete('arc')
+
+        if fraction <= 0:
+            return
+        
+        gap = 12    # degres of empty space
+        max_sweep = 360 - gap   # the fullest the arc ever gets
+        sweep = fraction * max_sweep
+
+        start_angle = 90 - gap / 2
+
+        c.create_arc(
+            cen - r, cen - r,
+            cen + r, cen + r,
+            start=start_angle,
+            extent=-sweep,  # negative = clockwise
+            style='arc', outline=color, width=8,
+            tags='arc',
         )
 

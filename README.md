@@ -8,14 +8,16 @@ be happy to just have on screen, that also times your focus sessions.
 
 - A real-time analog clock (hour, minute, thin second hand) in a soft
   charcoal palette with Roman numerals
-- (Coming) A soft arc around the rim that shrinks as a focus interval runs
+- A soft arc around the rim that shrinks as a focus interval runs
   down, with preset lengths and a focus → break loop
+- (Coming) Interval preset buttons and start/pause controls
 - (Later) Calming music during breaks
 
 ## Structure
 
 - `clock.py` — all the drawing (face, numerals, hands, arc)
-- `timer.py` — Pomodoro interval logic *(coming)*
+- `timer.py` — Pomodoro interval logic (focus/break phases, countdown, loo[])
+- `tests/` - tests for the timer logic (`python -m pytest tests/ -v`)
 - `app.py` — the app you run; builds the window and wires it together
 
 ## Setup
@@ -51,5 +53,6 @@ python app.py
 
 ## Status
 
-🚧 Early build. Real-time clock working; Pomodoro interval arc, presets,
-and the focus/break loop are next.
+🚧 Working core. Real-time clock, countdown arc, and the automatic
+focus → break loop all functioning. Next: preset buttons and start/pause
+controls, then calming break music.
